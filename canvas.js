@@ -7,8 +7,47 @@ canvas.height = window.innerHeight;
 // gets us access to all functions, etc
 var ctx = canvas.getContext("2d");
 
+//customize shapes
+ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 // (x, y, width, height)
-ctx.fillRect(300, 234, 233, 89);
-ctx.fillRect(32, 90, 434, 100);
+ctx.fillRect(300, 234, 89, 89);
+ctx.fillStyle = "rgba(150, 100, 50, 0.5)";
+ctx.fillRect(32, 90, 80, 100);
+ctx.fillStyle = "rgba(200, 100, 200, 0.5)";
 ctx.fillRect(90, 321, 100, 100);
-ctx.fillRect(300, 3, 23, 533);
+ctx.fillStyle = "rgba(0, 50, 50, 0.5)";
+ctx.fillRect(300, 3, 99, 70);
+
+// Lines
+ctx.beginPath();
+// starting point
+ctx.moveTo(50, 300);
+// state where we want the line to go to
+ctx.lineTo(300, 100);
+ctx.lineTo(400,300);
+// customize line
+ctx.strokeStyle = "#fa34a3";
+// draw the line
+ctx.stroke();
+
+// Arc / Circle
+// ctx.beginPath();
+// ctx.arc(300, 300, 30, 0, Math.PI * 2, false);
+// ctx.strokeStyle = "blue";
+// ctx.stroke();
+
+// creating multiple circles
+// set i variable, increment i every time it is run
+for (var i = 0; i < 10; i++) {
+  // returns a number anywhere from 0 - 1
+  var x = Math.random() * window.innerWidth;
+  var y = Math.random() * window.innerHeight;
+  var r = Math.random() * 251;
+  var g = Math.random() * 251;
+  var b = Math.random() * 251;
+
+  ctx.beginPath();
+  ctx.arc(x, y, 30, 0, Math.PI * 2, false);
+  ctx.strokeStyle = "rgba(100, 200, 50, 0.5)";
+  ctx.stroke();
+}
