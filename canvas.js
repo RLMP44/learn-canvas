@@ -42,12 +42,9 @@ for (var i = 0; i < 10; i++) {
   // returns a number anywhere from 0 - 1
   var x = Math.random() * window.innerWidth;
   var y = Math.random() * window.innerHeight;
-  var r = Math.random() * 251;
-  var g = Math.random() * 251;
-  var b = Math.random() * 251;
 
   ctx.beginPath();
   ctx.arc(x, y, 30, 0, Math.PI * 2, false);
-  ctx.strokeStyle = "rgba(100, 200, 50, 0.5)";
+  ctx.strokeStyle = "rgba(" + Math.random() * 251 + ", " + Math.random() * 251 + ", " + Math.random() * 251 + ", 0.5)";
   ctx.stroke();
 }
