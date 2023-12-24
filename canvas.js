@@ -49,18 +49,28 @@ for (var i = 0; i < 10; i++) {
   ctx.stroke();
 }
 
-var max_seats = 25
-var columns = 5
-var rows = 5
-var working_width = window.innerWidth / (columns * 2 + 1)
-var working_height = window.innerHeight / (rows * 2 + 1)
-var x_coor = working_width
-var y_coor = working_height
-for (var i = 0; i < columns; i++) {
-  for (var i = 0; i < rows; i++) {
+var max_seats = 25;
+var columns = 5;
+var rows = 5;
+var working_width = window.innerWidth / (columns * 2 + 1);
+var working_height = window.innerHeight / (rows * 2 + 1);
+var x_coor = working_width;
+var y_coor = working_height;
+
+function generateDesks(rows, columns, x_coor, y_coor, working_width, working_height) {
+  for (var c = 0; c < columns; c++) {
+    generateRow(rows, x_coor, y_coor, working_width, working_height);
+    y_coor += working_height * 2;
+  }
+}
+
+function generateRow(rows, x_coor, y_coor) {
+  for (var r = 0; r < rows; r++) {
+    console.log("---" + y_coor);
     ctx.fillStyle = "black";
     ctx.fillRect(x_coor, y_coor, working_width, working_height);
     x_coor += working_width * 2;
   }
-  y_coor += working_height * 2;
 }
+
+generateDesks(rows, columns, x_coor, y_coor, working_width, working_height);
