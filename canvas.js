@@ -50,42 +50,70 @@ var ctx = canvas.getContext("2d");
 // }
 
 
-// ------------- make a moving circle -------------------- //
-var x = Math.random() * innerWidth; // Math.random generates a random value between 0 and 1
-var y = Math.random() * innerHeight;
-var dx = ((Math.random() - 0.5) * 8);  // dx is standard for "velocity"
-var dy = ((Math.random() - 0.5) * 8);  // -0.5 to make sure we get either a pos or neg num
-var radius = 30;
+// -------------- Make multiple moving circles ------------------ //
+
+// create a JavaScript Object
+function Circle(x, y, dx, dy, radius) {
+  this.x = x;
+  this.y = y;
+  this.dx = dx;
+  this.dy = dy;
+  this.radius = radius;
+
+  this.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.strokeStyle = "rgb(3,84,128)";
+    ctx.stroke();
+    ctx.fillStyle = "rgb(3,84,128)";
+  }
+
+  this.update = function() {
+    // get circle to bounce left and right
+    if (this.x + this.radius > innerWidth || this.x - this.radius < 0) { // add/sub radius so circle bounces off its edge
+      this.dx *= -1;
+    }
+    // get circle to bounce vertically
+    if (this.y + this.radius > innerHeight || this.y - this.radius < 0) { // add/sub radius so circle bounces off its edge
+      this.dy *= -1;
+    }
+
+    this.x += this.dx;
+    this.y += this.dy;
+
+    this.draw();
+  }
+}
+
+var circleArray = [];
+
+// create for loop to make multiple circles
+for (var i = 0; i < 100; i++) {
+  // make a moving circle
+  var radius = Math.random() * 50;
+  var x = Math.random() * (innerWidth - radius * 2) + radius; // Math.random generates a random value between 0 and 1
+  var y = Math.random() * (innerHeight - radius * 2) + radius;
+  var dx = ((Math.random() - 0.5) * 2);  // dx is standard for "velocity"
+  var dy = ((Math.random() - 0.5) * 2);  // -0.5 to make sure we get either a pos or neg num
+  circleArray.push(new Circle(x, y, dx, dy, radius));
+}
 
 function animate () {
   requestAnimationFrame(animate); // takes another function as an argument
   // clear canvas before each render
   ctx.clearRect(0, 0, innerWidth, innerHeight);
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-  ctx.strokeStyle = "blue";
-  ctx.stroke();
 
-  // get circle to bounce left and right
-  if (x + radius > innerWidth || x - radius < 0) { // add/sub radius so circle bounces off its edge
-    dx *= -1;
+  for (var i = 0; i < circleArray.length; i++) {
+    circleArray[i].update();
   }
-  // get circle to bounce vertically
-  if (y + radius > innerHeight || y - radius < 0) { // add/sub radius so circle bounces off its edge
-    dy *= -1;
-  }
-
-  x += dx;
-  y += dy;
 }
-
-
-
+console.log(circleArray);
 animate();
 
-// ------------------------------------------------ //
 
-// code for seat sensei
+
+// ---------------------- Code for Seat Sensei -------------------------- //
+
 // var max_seats = 25;
 // var columns = 3;
 // var rows = 5;
