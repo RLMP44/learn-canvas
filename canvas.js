@@ -50,11 +50,11 @@ var ctx = canvas.getContext("2d");
 // }
 
 
-// make a moving circle
-var x = 200;
-var y = 200;
-var dx = 4;  // dx is standard for "velocity"
-var dy = 4;
+// ------------- make a moving circle -------------------- //
+var x = Math.random() * innerWidth; // Math.random generates a random value between 0 and 1
+var y = Math.random() * innerHeight;
+var dx = ((Math.random() - 0.5) * 8);  // dx is standard for "velocity"
+var dy = ((Math.random() - 0.5) * 8);  // -0.5 to make sure we get either a pos or neg num
 var radius = 30;
 
 function animate () {
