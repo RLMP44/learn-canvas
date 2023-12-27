@@ -52,7 +52,9 @@ var ctx = canvas.getContext("2d");
 
 // make a moving circle
 var x = 200;
+var y = 200;
 var dx = 4;  // dx is standard for "velocity"
+var dy = 4;
 var radius = 30;
 
 function animate () {
@@ -60,15 +62,21 @@ function animate () {
   // clear canvas before each render
   ctx.clearRect(0, 0, innerWidth, innerHeight);
   ctx.beginPath();
-  ctx.arc(x, 200, radius, 0, Math.PI * 2, false);
+  ctx.arc(x, y, radius, 0, Math.PI * 2, false);
   ctx.strokeStyle = "blue";
   ctx.stroke();
 
+  // get circle to bounce left and right
   if (x + radius > innerWidth || x - radius < 0) { // add/sub radius so circle bounces off its edge
     dx *= -1;
   }
+  // get circle to bounce vertically
+  if (y + radius > innerHeight || y - radius < 0) { // add/sub radius so circle bounces off its edge
+    dy *= -1;
+  }
 
   x += dx;
+  y += dy;
 }
 
 
