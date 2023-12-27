@@ -50,48 +50,75 @@ var ctx = canvas.getContext("2d");
 // }
 
 
+// make a moving circle
+var x = 200;
+var dx = 4;  // dx is standard for "velocity"
+var radius = 30;
 
-var max_seats = 25;
-var columns = 3;
-var rows = 5;
-var working_width = window.innerWidth / (columns * 2 + 1);
-var working_height = window.innerHeight / (rows * 2 + 1);
-var x_coor = working_width;
-var y_coor = working_height;
+function animate () {
+  requestAnimationFrame(animate); // takes another function as an argument
+  // clear canvas before each render
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  ctx.beginPath();
+  ctx.arc(x, 200, radius, 0, Math.PI * 2, false);
+  ctx.strokeStyle = "blue";
+  ctx.stroke();
 
-function generateDesks() {
-  if (rows < columns) {
-    console.log("condition 1")
-    for (var c = 0; c < columns; c++) {
-      generateRow(rows, x_coor, y_coor);
-      y_coor += working_height * 2;
-    }
-  } else {
-    console.log("condition 2")
-    for (var r = 0; r < rows; r++) {
-      generateColumn(columns, x_coor, y_coor);
-      x_coor += working_width * 2;
-    }
+  if (x + radius > innerWidth || x - radius < 0) { // add/sub radius so circle bounces off its edge
+    dx *= -1;
   }
+
+  x += dx;
 }
 
-function generateRow(rows, x_coor, y_coor) {
-  for (var r = 0; r < rows; r++) {
-    console.log("generating row");
-    ctx.fillStyle = "black";
-    ctx.fillRect(x_coor, y_coor, working_width, working_height);
-    x_coor += working_width * 2;
-  }
-}
 
-function generateColumn(columns, x_coor, y_coor) {
-  for (var c = 0; c < columns; c++) {
-    console.log("generating column");
-    ctx.fillStyle = "black";
-    ctx.fillRect(x_coor, y_coor, working_width, working_height);
-    console.log(x_coor)
-    y_coor += working_height * 2;
-  }
-}
 
-generateDesks();
+animate();
+
+// ------------------------------------------------ //
+
+// code for seat sensei
+// var max_seats = 25;
+// var columns = 3;
+// var rows = 5;
+// var working_width = window.innerWidth / (columns * 2 + 1);
+// var working_height = window.innerHeight / (rows * 2 + 1);
+// var x_coor = working_width;
+// var y_coor = working_height;
+
+// function generateDesks() {
+//   if (rows < columns) {
+//     console.log("condition 1")
+//     for (var c = 0; c < columns; c++) {
+//       generateRow(rows, x_coor, y_coor);
+//       y_coor += working_height * 2;
+//     }
+//   } else {
+//     console.log("condition 2")
+//     for (var r = 0; r < rows; r++) {
+//       generateColumn(columns, x_coor, y_coor);
+//       x_coor += working_width * 2;
+//     }
+//   }
+// }
+
+// function generateRow(rows, x_coor, y_coor) {
+//   for (var r = 0; r < rows; r++) {
+//     console.log("generating row");
+//     ctx.fillStyle = "black";
+//     ctx.fillRect(x_coor, y_coor, working_width, working_height);
+//     x_coor += working_width * 2;
+//   }
+// }
+
+// function generateColumn(columns, x_coor, y_coor) {
+//   for (var c = 0; c < columns; c++) {
+//     console.log("generating column");
+//     ctx.fillStyle = "black";
+//     ctx.fillRect(x_coor, y_coor, working_width, working_height);
+//     console.log(x_coor)
+//     y_coor += working_height * 2;
+//   }
+// }
+
+// generateDesks();
