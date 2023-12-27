@@ -94,8 +94,8 @@ for (var i = 0; i < 100; i++) {
   var radius = Math.random() * 50;
   var x = Math.random() * (innerWidth - radius * 2) + radius; // Math.random generates a random value between 0 and 1
   var y = Math.random() * (innerHeight - radius * 2) + radius;
-  var dx = ((Math.random() - 0.5));  // dx is standard for "velocity"
-  var dy = ((Math.random() - 0.5));  // -0.5 to make sure we get either a pos or neg num
+  var dx = ((Math.random() - 0.5) * 0.60);  // dx is standard for "velocity"
+  var dy = ((Math.random() - 0.5) * 0.60);  // -0.5 to make sure we get either a pos or neg num
   circleArray.push(new Circle(x, y, dx, dy, radius));
 }
 
