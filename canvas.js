@@ -49,6 +49,24 @@ var ctx = canvas.getContext("2d");
 //   ctx.stroke();
 // }
 
+var mouse = {
+  x: undefined,
+  y: undefined
+}
+
+var maxRadius = 40;
+var minRadius = 2;
+
+var colorArray = [
+  '#ffaa33',
+  '#ffffff',
+
+];
+
+window.addEventListener('mousemove', function(event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+})
 
 // -------------- Make multiple moving circles ------------------ //
 
@@ -81,6 +99,17 @@ function Circle(x, y, dx, dy, radius) {
 
     this.x += this.dx;
     this.y += this.dy;
+
+    // interactivity
+    if (mouse.x - this.x < 50 && mouse.x - this.x > -50
+      && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+        if (this.radius < maxRadius) {
+          this.radius += 1;
+        }
+
+    } else if (this.radius > 2) {
+      this.radius -= 1;
+    }
 
     this.draw();
   }
