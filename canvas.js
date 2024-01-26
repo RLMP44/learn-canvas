@@ -60,7 +60,9 @@ var minRadius = 2;
 var colorArray = [
   '#ffaa33',
   '#ffffff',
-
+  '#00ff00',
+  '#4411aa',
+  '#ff1100'
 ];
 
 window.addEventListener('mousemove', function(event) {
@@ -77,11 +79,13 @@ function Circle(x, y, dx, dy, radius) {
   this.dx = dx;
   this.dy = dy;
   this.radius = radius;
+  this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   this.draw = function() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = `rgba(167,231,248,.05)`;
+    // get random color from array by getting random number and rounding down
+    ctx.fillStyle = this.color;
     ctx.fill();
     // ctx.strokeStyle = "rgb(3,84,128)";
     // ctx.stroke();
