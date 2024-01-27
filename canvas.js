@@ -58,12 +58,15 @@ var maxRadius = 40;
 var minRadius = 2;
 
 var colorArray = [
-  '#36BFB1',
-  '#038C73',
-  '#02735E',
-  '#014034',
-  '#0D0D0D',
-  'white'
+  '#caf0f8',
+  '#ade8f4',
+  '#90e0ef',
+  '#48cae4',
+  '#00b4d8',
+  '#0096c7',
+  '#0077b6',
+  '#023e8a',
+  '#03045e'
 ];
 
 window.addEventListener('mousemove', function(event) {
@@ -138,7 +141,7 @@ function init() {
   // create for loop to make multiple circles
   for (var i = 0; i < 800; i++) {
     // make a moving circle
-    var radius = Math.random() * 3 + 1;
+    var radius = Math.random() * 6 + 1;
     var x = Math.random() * (innerWidth - radius * 2) + radius; // Math.random generates a random value between 0 and 1
     var y = Math.random() * (innerHeight - radius * 2) + radius;
     var dx = ((Math.random() - 0.5) * 0.60);  // dx is standard for "velocity"
