@@ -58,16 +58,25 @@ var maxRadius = 40;
 var minRadius = 2;
 
 var colorArray = [
-  '#ffaa33',
-  '#ffffff',
-  '#00ff00',
-  '#4411aa',
-  '#ff1100'
+  '#36BFB1',
+  '#038C73',
+  '#02735E',
+  '#014034',
+  '#0D0D0D',
+  'white'
 ];
 
 window.addEventListener('mousemove', function(event) {
   mouse.x = event.x;
   mouse.y = event.y;
+})
+
+// call resize every time the browser changes
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerWidth;
+
+  init();
 })
 
 // -------------- Make multiple moving circles ------------------ //
@@ -79,6 +88,8 @@ function Circle(x, y, dx, dy, radius) {
   this.dx = dx;
   this.dy = dy;
   this.radius = radius;
+  // set min radius as original radius so it goes back to original size
+  this.minRadius = radius;
   this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   this.draw = function() {
@@ -118,18 +129,22 @@ function Circle(x, y, dx, dy, radius) {
     this.draw();
   }
 }
-
 var circleArray = [];
 
-// create for loop to make multiple circles
-for (var i = 0; i < 100; i++) {
-  // make a moving circle
-  var radius = Math.random() * 50;
-  var x = Math.random() * (innerWidth - radius * 2) + radius; // Math.random generates a random value between 0 and 1
-  var y = Math.random() * (innerHeight - radius * 2) + radius;
-  var dx = ((Math.random() - 0.5) * 0.60);  // dx is standard for "velocity"
-  var dy = ((Math.random() - 0.5) * 0.60);  // -0.5 to make sure we get either a pos or neg num
-  circleArray.push(new Circle(x, y, dx, dy, radius));
+function init() {
+  // reset circle array so there are no memory leaks
+  circleArray = [];
+
+  // create for loop to make multiple circles
+  for (var i = 0; i < 800; i++) {
+    // make a moving circle
+    var radius = Math.random() * 3 + 1;
+    var x = Math.random() * (innerWidth - radius * 2) + radius; // Math.random generates a random value between 0 and 1
+    var y = Math.random() * (innerHeight - radius * 2) + radius;
+    var dx = ((Math.random() - 0.5) * 0.60);  // dx is standard for "velocity"
+    var dy = ((Math.random() - 0.5) * 0.60);  // -0.5 to make sure we get either a pos or neg num
+    circleArray.push(new Circle(x, y, dx, dy, radius));
+  }
 }
 
 function animate () {
@@ -143,6 +158,7 @@ function animate () {
 }
 console.log(circleArray);
 animate();
+init();
 
 
 
