@@ -55,7 +55,7 @@ var mouse = {
 }
 
 var maxRadius = 40;
-var minRadius = 2;
+// var minRadius = 2;
 
 var colorArray = [
   '#caf0f8',
@@ -125,7 +125,7 @@ function Circle(x, y, dx, dy, radius) {
           this.radius += 1;
         }
 
-    } else if (this.radius > 2) {
+    } else if (this.radius > this.minRadius) {
       this.radius -= 1;
     }
 
@@ -159,7 +159,7 @@ function animate () {
     circleArray[i].update();
   }
 }
-console.log(circleArray);
+
 animate();
 init();
 
